@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="2.5.0" type="plugin" group="redshop_payment"
+           method="upgrade">
+    <name>PLG_RS_PAYMENT_PLATRON</name>
+    <version>1.0.0</version>
+    <creationDate>October 2014</creationDate>
+    <author>platron.ru</author>
+    <authorEmail>it@platron.ru</authorEmail>
+    <authorUrl>www.platron.ru</authorUrl>
+    <copyright>www.platron.ru</copyright>
+    <license>GNU General Public License v2</license>
+    <description>This plugin enables standard Platron payments</description>
+    <files>
+        <filename plugin="rs_payment_platron">rs_payment_platron.php</filename>
+        <folder>rs_payment_platron</folder>
+    </files>
+	<languages>
+        <language tag="en-GB">language/en-GB/en-GB.plg_redshop_payment_rs_payment_platron.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.plg_redshop_payment_rs_payment_platron.sys.ini</language>
+        <language tag="ru-RU">language/ru-RU/ru-RU.plg_redshop_payment_rs_payment_platron.ini</language>
+        <language tag="ru-RU">language/ru-RU/ru-RU.plg_redshop_payment_rs_payment_platron.sys.ini</language>
+    </languages>
+    <config addfieldpath="/administrator/components/com_redshop/elements">
+        <fields name="params">
+
+            <fieldset name="basic">
+
+                <field name="merchant_id" type="text" size="10" default=""
+                       label="Merchant id" description="See at platron admin"/>
+                <field name="secret_key" type="text" size="30" default=""
+                       label="Secret key" description="See at platron admin"/>
+				<field name="lifetime" type="text" size="5" default=""
+                       label="Transaction life time" description="To payment systems, which have no check. Set in minutes"/>
+                <field name="debug_mode" type="radio" default="1" label="Debug Mode: "
+                       description="To test communication">
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </field>
+
+				<field name="pending_status" type="sql"
+                       query="SELECT order_status_code AS st_value, order_status_name AS st_title FROM #__redshop_order_status"
+                       key_field="st_value" value_field="st_title" default="P"
+                       label="Order Status for ready to pay transactions"
+                       description="Select the order status to which the actual order is set, if the payment transaction could be paid.">
+                </field>
+                <field name="verify_status" type="sql"
+                       query="SELECT order_status_code AS st_value, order_status_name AS st_title FROM #__redshop_order_status"
+                       key_field="st_value" value_field="st_title" default="C"
+                       label="Order Status for successful transactions"
+                       description="Select the order status to which the actual order is set, if the payment transaction was successful.">
+                </field>
+                <field name="invalid_status" type="sql"
+                       query="SELECT order_status_code AS st_value, order_status_name AS st_title FROM #__redshop_order_status"
+                       key_field="st_value" value_field="st_title" default="X"
+                       label="Order Status for failed transactions"
+                       description="Select an order status for failed payment transactions.">
+                </field>
+
+				<field name="sucess_url" type="text" size="50" default=""
+                       label="Url customer to success" description="Customer with success payment will redirect here"/>
+				<field name="failure_url" type="text" size="50" default=""
+                       label="Url customer to failed" description="Customer with failed payment will redirect here"/>
+            </fieldset>
+        </fields>
+    </config>
+</extension>
