@@ -79,7 +79,7 @@ $arrFields['pg_sig'] = PG_Signature::make('payment.php', $arrFields, $this->_par
 //var_dump($items, $this->_params, $data, $element);
 //die();
 
-echo "<form action='https://paybox.kz/payment.php' method='post' name='platronform' id='platronform'>";
+echo "<form action='https://api.paybox.money/payment.php' method='post' name='platronform' id='platronform'>";
 echo "<h3>Подождите...</h3>";
 
 foreach ($arrFields as $name => $value)
