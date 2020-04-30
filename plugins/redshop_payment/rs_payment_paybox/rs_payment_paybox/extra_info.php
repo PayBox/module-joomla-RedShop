@@ -25,7 +25,7 @@ foreach($items as $objItem){
 		$strDescription .= "*".$objItem->product_quantity;
 	$strDescription .= "; ";
 }
-$returnUrl = JURI::base() . "index.php?tmpl=component&option=com_redshop&view=order_detail&controller=order_detail&task=notify_payment&payment_plugin=rs_payment_platron&Itemid=$_REQUEST[Itemid]&orderid=" . $data['order_id'];
+$returnUrl = JURI::base() . "index.php?tmpl=component&option=com_redshop&view=order_detail&controller=order_detail&task=notify_payment&payment_plugin=rs_payment_paybox&Itemid=$_REQUEST[Itemid]&orderid=" . $data['order_id'];
 $nLifeTime = $this->_params->get("lifetime");
 
 $strCurrency = CURRENCY_CODE;
@@ -79,7 +79,7 @@ $arrFields['pg_sig'] = PG_Signature::make('payment.php', $arrFields, $this->_par
 //var_dump($items, $this->_params, $data, $element);
 //die();
 
-echo "<form action='https://api.paybox.money/payment.php' method='post' name='platronform' id='platronform'>";
+echo "<form action='https://api.paybox.money/payment.php' method='post' name='payboxform' id='payboxform'>";
 echo "<h3>Подождите...</h3>";
 
 foreach ($arrFields as $name => $value)
@@ -89,4 +89,4 @@ foreach ($arrFields as $name => $value)
 
 echo "<input type='submit' value='оплатить'></form>";
 ?>
-<script type='text/javascript'>document.platronform.submit();</script>
+<script type='text/javascript'>document.payboxform.submit();</script>
